@@ -5,7 +5,7 @@
        "args": [
            "cp",
 		   "gs://${_MODEL_REPO}/lr_model.pkl",
-           "./Assignment1/prediction-api/model.pkl"
+           "./Assignment1/prediction-api-A/model.pkl"
         ]
     },
     {
@@ -13,15 +13,15 @@
       "args": [
         "build",
         "-t",
-        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api:0.0.1",
-        "./Assignment1/prediction-api"
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api-a:0.0.1",
+        "./Assignment1/prediction-api-A"
       ]
     },   
     {
       "name": "gcr.io/cloud-builders/docker",
       "args": [
         "push",
-        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api:0.0.1"
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api-a:0.0.1"
       ]
     },    
     {
@@ -30,9 +30,9 @@
       "args": [
         "run",
         "deploy",
-        "prediction-api",
+        "prediction-api-a",
         "--image",
-        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api:0.0.1",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/prediction-api-a:0.0.1",
         "--region",
         "us-central1",
         "--platform",
