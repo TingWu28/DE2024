@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Heart Disease Check Form</title>
+</head>
+<body>
+
+<form action="/checkheartdisease" method="POST">
+    <h1> Check Heart Disease</h1>
+    <label for="age">Age in years:</label>
+    <input type="text" id="age" name="age" placeholder="age"> <br>
+
+    <label for="sex">Sex(1 = male; 0 = female):</label>
+    <input type="text" id="sex" name="sex" placeholder="sex"> <br>
+
+    <label for="cp">Chest pain type (4 values):</label>
+    <input type="text" id="cp" name="cp" placeholder="cp"> <br>
+
+    <label for="trestbps">Resting blood pressure(mm):</label>
+    <input type="text" id="trestbps" name="trestbps" placeholder="trestbps"> <br>
+
+    <label for="chol">Serum cholestoral(mg/dl):</label>
+    <input type="text" id="chol" name="chol" placeholder="chol"> <br>
+
+    <label for="fbs">Fasting blood sugar > 120 mg/dl(1 = Yes; 0 = No):</label>
+    <input type="text" id="fbs" name="fbs" placeholder="fbs"> <br>
+
+    <label for="restcg">Resting electrocardiographic results (values 0,1,2):</label>
+    <input type="text" id="restcg" name="restcg" placeholder="restcg"> <br>
+
+    <label for="thalach">Maximum heart rate achieved:</label>
+    <input type="text" id="thalach" name="thalach" placeholder="thalach"> <br>
+
+    <label for="exang">Exercise induced angina:</label>
+    <input type="text" id="exang" name="exang" placeholder="exang"> <br>
+
+    <label for="oldpeak">ST depression induced by exercise relative to rest:</label>
+    <input type="text" id="oldpeak" name="oldpeak" placeholder="oldpeak"> <br>
+
+    <label for="slope">The slope of the peak exercise ST segment:</label>
+    <input type="text" id="slope" name="slope" placeholder="slope"> <br>
+
+    <label for="ca">Number of major vessels (0-3) colored by flourosopy:</label>
+    <input type="text" id="ca" name="ca" placeholder="ca"> <br>
+
+    <label for="thal">Thal: 0 = normal; 1 = fixed defect; 2 = reversable defect:</label>
+    <input type="text" id="thal" name="thal" placeholder="thal"> <br>
+    <p><input type='submit' value='Check'/></p>
+</form>
+
+</body>
+</html>
+
+<!-- check https://flask.palletsprojects.com/en/2.3.x/tutorial/templates/ for information if needed -->
