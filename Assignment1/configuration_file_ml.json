@@ -1,0 +1,38 @@
+{
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/git",
+      "args": [
+        "clone",
+        "https://github.com/your-repo/dataset-repository.git",
+        "/workspace/dataset"
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/gsutil",
+      "args": [
+        "cp",
+        "/workspace/dataset/your_dataset.csv",
+        "gs://data_de2024_2117913/training_set.csv"
+      ]
+    },
+    {
+      "name": "gcr.io/google.com/cloudsdktool/cloud-sdk",
+      "args": [
+        "ai",
+        "pipelines",
+        "jobs",
+        "run",
+        "--pipeline-definition",
+        "gs://your-bucket-name/your_ml_pipeline.yaml",
+        "--region",
+        "us-central1",
+        "--parameter-values",
+        "dataset_uri=gs://your-bucket-name/your_dataset.csv"
+      ]
+    }
+  ],
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY"
+  }
+}
