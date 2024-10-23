@@ -35,4 +35,4 @@ class HeartdiseasePredictor:
         dfcp['pclass'] = y_classes.tolist()
         status = (dfcp['pclass'][0] > 0.5)
         # return the prediction outcome as a json message. 200 is HTTP status code 200, indicating successful completion
-        return str(status)
+        return jsonify({'result': str(status)}), 200
