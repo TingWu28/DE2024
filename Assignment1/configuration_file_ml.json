@@ -21,7 +21,7 @@
       "entrypoint": "bash",
       "args": [
         "-c",
-        "gcloud ai custom-jobs create --region=us-central1 --display-name='retrain-model' --config=gs://pipelines_de2024_2117913/heartdisease_predictor_training_pipeline.yaml"
+        "gcloud ai custom-jobs create --region=us-central1 --display-name='retrain-model' --config=gs://temp_de2024_2117913/heartdisease_predictor_training_pipeline.yaml"
       ]
     }
   ],
