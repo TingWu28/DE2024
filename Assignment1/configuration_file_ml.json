@@ -2,37 +2,44 @@
   "steps": [
     {
       "name": "gcr.io/cloud-builders/git",
+      "entrypoint": "bash",
       "args": [
-        "clone",
-        "https://github.com/your-repo/dataset-repository.git",
-        "/workspace/dataset"
+        "-c",
+        "mkdir -p /workspace/dataset && git clone https://github.com/TingWu28/DE2024.git && cp ./Assignment1/data/training_set.csv /workspace/dataset"
       ]
     },
     {
       "name": "gcr.io/cloud-builders/gsutil",
       "args": [
         "cp",
-        "/workspace/dataset/your_dataset.csv",
-        "gs://data_de2024_2117913/training_set.csv"
+        "/workspace/dataset/training_set.csv",
+        "gs://data_de2024_2117913/datasets/training_set.csv"
       ]
     },
     {
       "name": "gcr.io/google.com/cloudsdktool/cloud-sdk",
+      "entrypoint": "bash",
       "args": [
-        "ai",
-        "pipelines",
-        "jobs",
-        "run",
-        "--pipeline-definition",
-        "gs://your-bucket-name/your_ml_pipeline.yaml",
-        "--region",
-        "us-central1",
-        "--parameter-values",
-        "dataset_uri=gs://your-bucket-name/your_dataset.csv"
+        "-c",
+        "gcloud ai custom-jobs create --region=us-central1 --display-name='retrain-model' --config=heartdisease_predictor_training_pipeline.yaml"
       ]
     }
   ],
+  "substitutions": {
+    "_LOCATION": "us-central1",
+    "_MODEL_REPO": "model_de2024_2117913",
+    "_REPOSITORY": "labrepo"
+  },
+  "timeout": "1200s",
   "options": {
     "logging": "CLOUD_LOGGING_ONLY"
+  },
+  "source": {
+    "repoSource": {
+      "projectId": "de2024-435020",
+      "repoName": "DE2024",
+      "branchName": "main",
+      "dir": "Assignment1/data/"
+    }
   }
 }
