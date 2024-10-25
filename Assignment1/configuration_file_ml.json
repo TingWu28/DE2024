@@ -1,19 +1,19 @@
 {
   "steps": [
     {
-      "name": "gcr.io/cloud-builders/git",
-      "entrypoint": "bash",
+      "name": "gcr.io/cloud-builders/docker",
       "args": [
-        "-c",
-        "mkdir -p /workspace/dataset && git clone https://github.com/TingWu28/DE2024.git && cp ./Assignment1/data/training_set.csv /workspace/dataset"
+        "build",
+        "-t",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest",
+        "./Assignment1/ml_pipeline_trigger"
       ]
     },
     {
-      "name": "gcr.io/cloud-builders/gsutil",
+      "name": "gcr.io/cloud-builders/docker",
       "args": [
-        "cp",
-        "/workspace/dataset/training_set.csv",
-        "gs://data_de2024_2117913/datasets/training_set.csv"
+        "push",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest"
       ]
     },
     {
@@ -21,25 +21,12 @@
       "entrypoint": "bash",
       "args": [
         "-c",
-        "gcloud ai custom-jobs create --region=us-central1 --display-name='retrain-model' --config=gs://temp_de2024_2117913/heartdisease_predictor_training_pipeline.yaml"
+        "gcloud run deploy ml-pipeline-executor --image=gcr.io/$PROJECT_ID/ml-pipeline-executor:latest --region=us-central1 --platform=managed --allow-unauthenticated"
       ]
     }
   ],
-  "substitutions": {
-    "_LOCATION": "us-central1",
-    "_MODEL_REPO": "model_de2024_2117913",
-    "_REPOSITORY": "labrepo"
-  },
   "timeout": "1200s",
   "options": {
     "logging": "CLOUD_LOGGING_ONLY"
-  },
-  "source": {
-    "repoSource": {
-      "projectId": "de2024-435020",
-      "repoName": "DE2024",
-      "branchName": "main",
-      "dir": "Assignment1/data/"
-    }
   }
 }
