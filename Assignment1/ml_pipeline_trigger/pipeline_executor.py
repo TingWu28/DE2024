@@ -1,36 +1,28 @@
-import argparse
-import json
-import logging
-import sys
-
 import google.cloud.aiplatform as aip
+import logging
+import os
 
+def run_ml_pipeline():
+    pipeline_def = "gs://temp_de2024_2117913/heartdisease_predictor_training_pipeline.yaml"
+    pipeline_root = "gs://temp_de2024_2117913"
 
-def run_pipeline_job(name, pipeline_def, pipeline_root, parameter_dict):
-    # Opening JSON file
-    f = open(parameter_dict)
-    data = json.load(f)
-    print(data)
-    logging.info(data)
+    parameter_values = {
+        'project_id': 'de2024-435020',
+        'data_bucket': 'data_de2024_2117913',
+        'dataset_uri': 'gs://data_de2024_2117913/datasets/training_set.csv',
+        'model_repo': 'model_de2024_2117913',
+        'trigger_id': '72f313bc-6634-4db7-bd61-f97545795c8f'
+    }
+
     job = aip.PipelineJob(
-        display_name=name,
-		enable_caching=False,
+        display_name="retrain-model",
         template_path=pipeline_def,
         pipeline_root=pipeline_root,
-        parameter_values=data)
+        parameter_values=parameter_values
+    )
+    
     job.run()
 
-
-def parse_command_line_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--name', type=str, help="Pipeline Name")
-    parser.add_argument('--pipeline_def', type=str, default="pipeline.json", help="Pipeline JSON definition file")
-    parser.add_argument('--pipeline_root', type=str, help="GCP bucket for pipeline_root")
-    parser.add_argument('--parameter_dict', type=str, help="Pipeline parameters as a josn file")
-    args = parser.parse_args()
-    return vars(args)
-
-
-if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-    run_pipeline_job(**parse_command_line_arguments())
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    run_ml_pipeline()
