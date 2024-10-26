@@ -12,7 +12,8 @@ def run_ml_pipeline():
         'project_id': 'de2024-435020',
         'data_bucket': 'data_de2024_2117913',
         'dataset_uri': 'gs://data_de2024_2117913/datasets/training_set.csv',
-        'model_repo': 'models_de2024_2117913'
+        'model_repo': 'models_de2024_2117913',
+        'trigger_id':'d80ce0cd-b147-4934-a696-e569db1ee084'
     }
 
     # Create the job
