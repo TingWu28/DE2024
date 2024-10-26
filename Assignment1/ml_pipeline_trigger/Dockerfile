@@ -3,4 +3,4 @@ WORKDIR /workspace
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-ENTRYPOINT ["python","ml_pipeline_executor.py"]
+ENTRYPOINT ["python","/workspace/ml_pipeline_executor.py"]
