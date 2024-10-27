@@ -17,8 +17,20 @@
       ]
     },
     {
-     "name": "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest",
-       "args": [ ]
+      "name": "gcr.io/google.com/cloudsdktool/cloud-sdk",
+      "entrypoint": "gcloud",
+      "args": [
+        "run",
+        "deploy",
+        "ml-pipeline-executor",
+        "--image",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated"
+      ]
     }
   ],
   "timeout": "1200s",
@@ -26,3 +38,4 @@
     "logging": "CLOUD_LOGGING_ONLY"
   }
 }
+
