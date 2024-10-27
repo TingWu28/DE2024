@@ -5,7 +5,7 @@
       "args": [
         "build",
         "-t",
-        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest",
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:0.0.1",
         "./Assignment1/ml_pipeline_trigger"
       ]
     },
@@ -13,11 +13,11 @@
       "name": "gcr.io/cloud-builders/docker",
       "args": [
         "push",
-        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest"
+        "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:0.0.1"
       ]
     },
     {
-     "name": "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:latest",
+     "name": "${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/ml-pipeline-executor:0.0.1",
        "args": [ ]
     }
   ],
