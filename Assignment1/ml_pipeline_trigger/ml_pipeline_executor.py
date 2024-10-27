@@ -25,7 +25,7 @@ def run_ml_pipeline():
     )
 
     # Run the job
-    job.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+    job.run()
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
