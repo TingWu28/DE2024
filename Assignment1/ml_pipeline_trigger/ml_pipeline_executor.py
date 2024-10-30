@@ -22,7 +22,7 @@ def run_ml_pipeline():
         enable_caching=False,  # Make this False if you want to force re-execution of the pipeline
         template_path=pipeline_def,
         pipeline_root=pipeline_root,
-        location=REGION,
+        location="us-central1",
         parameter_values=parameter_values
     )
 
